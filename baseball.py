@@ -106,7 +106,7 @@ plt.show()
 ############################## Adding New Features ##############################
 
 # MLB average runs per game
-df['mlb_rpg'] = df['yearID'].apply(assign_mlb_rpg)
+df["mlb_rpg"] = df["yearID"].apply(assign_mlb_rpg)
 
 # Runs per game
 df["R_per_game"] = df["R"] / df["G"]
@@ -123,16 +123,16 @@ ax1 = fig.add_subplot(1,2,1)
 ax2 = fig.add_subplot(1,2,2)
 
 # Scatter plot of runs per game vs. wins
-ax1.scatter(df['R_per_game'], df['W'], c='blue')
-ax1.set_title('Runs per Game vs. Wins')
-ax1.set_xlabel('Runs per Game')
-ax1.set_ylabel('Wins')
+ax1.scatter(df["R_per_game"], df["W"], c="blue")
+ax1.set_title("Runs per Game vs. Wins")
+ax1.set_xlabel("Runs per Game")
+ax1.set_ylabel("Wins")
 
 # Scatter plot of runs allowed per game vs. wins
-ax2.scatter(df['RA_per_game'], df['W'], c='red')
-ax2.set_title('Runs Allowed per Game vs. Wins')
-ax2.set_xlabel('Runs Allowed per Game')
-ax2.set_ylabel('Wins')
+ax2.scatter(df["RA_per_game"], df["W"], c="red")
+ax2.set_title("Runs Allowed per Game vs. Wins")
+ax2.set_xlabel("Runs Allowed per Game")
+ax2.set_ylabel("Wins")
 plt.show()
 
 # Determine and display how each variable/feature correlates with each other
@@ -150,12 +150,14 @@ plt.show()
 ################################ Building Model ################################
 
 # Numerical columns needed for regression algorithms
-numeric_cols = ['G','R','AB','H','2B','3B','HR','BB','SO','SB','RA','ER','ERA','CG',
-'SHO','SV','IPouts','HA','HRA','BBA','SOA','E','DP','FP','R_per_game','RA_per_game','mlb_rpg','W']
+numeric_cols = ["G", "R", "AB", "H", "2B", "3B", "HR", "BB", "SO", "SB", "RA", "ER",
+"ERA", "CG", "SHO", "SV", "IPouts", "HA", "HRA", "BBA", "SOA", "E", "DP", "FP",
+"R_per_game", "RA_per_game", "mlb_rpg", "W"]
 
 # Numerical columns without the target variable (wins)
-attributes = ['G','R','AB','H','2B','3B','HR','BB','SO','SB','RA','ER','ERA','CG',
-'SHO','SV','IPouts','HA','HRA','BBA','SOA','E','DP','FP','R_per_game','RA_per_game','mlb_rpg']
+attributes = ["G", "R", "AB", "H", "2B", "3B", "HR", "BB", "SO", "SB", "RA", "ER",
+"ERA", "CG", "SHO", "SV", "IPouts", "HA", "HRA", "BBA", "SOA", "E", "DP", "FP",
+"R_per_game", "RA_per_game", "mlb_rpg"]
 data_attributes = df[attributes]
 
 data = df[numeric_cols]
@@ -180,10 +182,10 @@ print("Mean Absolute Error of Linear Regression:", mae)
 plt.subplots(figsize=(16, 9))
 plt.scatter(x_test["R_per_game"], y_test)
 plt.scatter(x_test["R_per_game"], predictions)
-plt.title('Linear Regression Win Predictions')
-plt.xlabel('Runs Per Game')
-plt.ylabel('Wins')
-plt.legend(['True Wins','Predicted Wins'])
+plt.title("Linear Regression Win Predictions")
+plt.xlabel("Runs Per Game")
+plt.ylabel("Wins")
+plt.legend(["True Wins","Predicted Wins"])
 plt.show()
 
 # Ridge CV
@@ -199,10 +201,10 @@ print("Mean Absolute Error of Ridge CV:", mae)
 plt.subplots(figsize=(16, 9))
 plt.scatter(x_test["R_per_game"], y_test)
 plt.scatter(x_test["R_per_game"], predictions)
-plt.title('Ridge CV Win Predictions')
-plt.xlabel('Runs Per Game')
-plt.ylabel('Wins')
-plt.legend(['True Wins','Predicted Wins'])
+plt.title("Ridge CV Win Predictions")
+plt.xlabel("Runs Per Game")
+plt.ylabel("Wins")
+plt.legend(["True Wins","Predicted Wins"])
 plt.show()
 
 # Lasso
@@ -218,8 +220,8 @@ print("Mean Absolute Error of Lasso:", mae)
 plt.subplots(figsize=(16, 9))
 plt.scatter(x_test["R_per_game"], y_test)
 plt.scatter(x_test["R_per_game"], predictions)
-plt.title('Lasso Win Predictions')
-plt.xlabel('Runs Per Game')
-plt.ylabel('Wins')
-plt.legend(['True Wins','Predicted Wins'])
+plt.title("Lasso Win Predictions")
+plt.xlabel("Runs Per Game")
+plt.ylabel("Wins")
+plt.legend(["True Wins","Predicted Wins"])
 plt.show()
